@@ -1,44 +1,51 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:145628923514:task-definition/nodejs-santino-task:1",
+    "compatibilities": [
+        "EC2",
+        "FARGATE",
+        "MANAGED_INSTANCES"
+    ],
     "containerDefinitions": [
         {
-            "name": "nodejs-app",
-            "image": "145628923514.dkr.ecr.us-east-1.amazonaws.com/nodejs-app_latest",
             "cpu": 0,
-            "portMappings": [
-                {
-                    "name": "nodejs-app-5000-tcp",
-                    "containerPort": 5000,
-                    "hostPort": 5000,
-                    "protocol": "tcp",
-                    "appProtocol": "http"
-                }
-            ],
-            "essential": true,
             "environment": [],
             "environmentFiles": [],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "ulimits": [],
+            "essential": true,
+            "image": "891377256408.dkr.ecr.us-east-1.amazonaws.com/nodejs-app:latest",
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/nodejs-santino-task",
+                    "awslogs-group": "/ecs/nodejs-app-task",
                     "awslogs-create-group": "true",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "ecs"
                 },
                 "secretOptions": []
             },
-            "systemControls": []
+            "mountPoints": [],
+            "name": "nodejs-app",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 5000,
+                    "hostPort": 5000,
+                    "name": "puerto-nodeapp",
+                    "protocol": "tcp"
+                }
+            ],
+            "systemControls": [],
+            "ulimits": [],
+            "volumesFrom": []
         }
     ],
-    "family": "nodejs-santino-task",
-    "taskRoleArn": "arn:aws:iam::145628923514:role/ecstaskExecution-Role",
-    "executionRoleArn": "arn:aws:iam::145628923514:role/ecstaskExecution-Role",
-    "revision": 1,
-    "volumes": [],
-    "status": "ACTIVE",
+    "cpu": "1024",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::891377256408:role/ecsTaskExecutionRole",
+    "family": "nodejs-app-task",
+    "memory": "3072",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2025-10-16T04:05:25.842Z",
+    "registeredBy": "arn:aws:sts::891377256408:assumed-role/AWSReservedSSO_System-Administrators_2878fd5a00e6256e/santino.marzano@bghtechpartner.com",
     "requiresAttributes": [
         {
             "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
@@ -62,23 +69,23 @@
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
         },
         {
+            "name": "ecs.capability.task-eni"
+        },
+        {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
         }
-    ],
-    "placementConstraints": [],
-    "compatibilities": [
-        "EC2"
     ],
     "requiresCompatibilities": [
         "EC2"
     ],
-    "memory": "3",
+    "revision": 2,
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-06-28T22:33:52.182Z",
-    "registeredBy": "arn:aws:sts::145628923514:assumed-role/AWSReservedSSO_AdministratorAccess_7bd167b8535f5f9b/santino.marzano@bghtechpartner.com",
-    "enableFaultInjection": false,
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:891377256408:task-definition/nodejs-app-task:2",
+    "taskRoleArn": "arn:aws:iam::891377256408:role/ecsTaskExecutionRole",
+    "volumes": [],
     "tags": []
 }
